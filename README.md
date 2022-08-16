@@ -16,3 +16,7 @@ This code is for AWS and GCP. The infrastructure it creates should be roughly eq
 * `terraform apply` Render cloud resources from code
 * `terraform state list` Describe what resources are being tracked
 * `terraform destroy` Destroy the infrastructure being tracked
+
+# WARNING
+
+Please do not blindly copy example code from this repository or anywhere. All code is insecure and needs to be reviewed.
