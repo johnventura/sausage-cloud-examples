@@ -1,0 +1,32 @@
+# create a symmetric key stored by AWS
+resource "aws_kms_key" "sausage_key" {
+  description             = "sausage key"
+  tags                    = var.sausage_kms_tags
+  deletion_window_in_days = 30 # cycle through keys every 30 days
+}
+
+# name the key something that is recognizable
+resource "aws_kms_alias" "kms_key_alias" {
+  name          = "alias/sausagekey"
+  target_key_id = aws_kms_key.sausage_key.key_id
+}
+
+# add some tags to the kms key
+variable "sausage_kms_tags" {
+  type = map(string)
+  default = {
+    "managed" = "terraform"
+  }
+}
+
+# tell AWS to encrypt the bucket
+resource "aws_s3_bucket_server_side_encryption_configuration" "sausage_bucket_encryption" {
+  bucket = aws_s3_bucket.sausage_bucket.id
+
+  rule {
+    apply_server_side_encryption_by_default {
+      kms_master_key_id = aws_kms_key.sausage_key.key_id
+      sse_algorithm     = "aws:kms"
+    }
+  }
+}

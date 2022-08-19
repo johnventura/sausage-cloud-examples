@@ -41,6 +41,12 @@ resource "aws_iam_policy" "tracker_instance_policy" {
         Effect   = "Allow"
         Resource = "arn:aws:ssm:*:*:parameter/sausage-*"
       },
+      # only needed if we are using KMS
+      #{
+      #  Action   = ["kms:Decrypt", "kms:Encrypt"]
+      #  Effect   = "Allow"
+      #  Resource = aws_kms_key.sausage_key.arn
+      #},
     ]
   })
 }
