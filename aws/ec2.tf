@@ -74,13 +74,13 @@ resource "aws_security_group" "allow_ssh_home" {
     cidr_blocks = ["9.9.9.9/32"] # list of IPs/networks that are allowed access
   }
 
-  egress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"] # might be a good idea to limit this
-    ipv6_cidr_blocks = ["::/0"]
-  }
+  #  egress {
+  #    from_port        = 0
+  #    to_port          = 0
+  #    protocol         = "-1"
+  #    cidr_blocks      = ["0.0.0.0/0"] # might be a good idea to limit this
+  #    ipv6_cidr_blocks = ["::/0"]
+  #  }
 
   tags = {
     Name = "ssh_home"

@@ -62,7 +62,7 @@ resource "google_compute_instance_template" "sausage_instance_template" {
 
   service_account {
     email  = "sausage@${local.project}.iam.gserviceaccount.com"
-    scopes = ["userinfo-email", "compute-ro", "storage-ro"] # limit this
+    scopes = ["compute-ro", "storage-ro"] # limit this
   }
 
   metadata = {

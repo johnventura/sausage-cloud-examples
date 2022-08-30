@@ -17,12 +17,6 @@ resource "aws_iam_policy" "tracker_instance_policy" {
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
-      # difficult to restrict the resource here
-      {
-        Action   = ["s3:ListAllMyBuckets"]
-        Effect   = "Allow"
-        Resource = "*" # has to be a wildcard
-      },
       # we are only allowed to read/write/list to one bucket
       {
         Action   = ["s3:ListBucket"]
@@ -31,7 +25,7 @@ resource "aws_iam_policy" "tracker_instance_policy" {
       },
       # only allowed to access files sausage*.csv files to bucket's root directory 
       {
-        Action   = ["s3:PutObject", "s3:GetObject"]
+        Action   = ["s3:GetObject"]
         Effect   = "Allow"
         Resource = "arn:aws:s3:::sausage-bucket/sausage*.csv"
       },
